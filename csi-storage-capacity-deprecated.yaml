@@ -1,0 +1,7 @@
+apiVersion: storage.k8s.io/v1beta1
+kind: CSIStorageCapacity
+metadata:
+  name: csi-storage-capacity-deprecated-test
+  namespace: suxess-it-dev
+storageClassName: some-storage-class
+capacity: 256G
