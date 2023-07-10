@@ -1,0 +1,9 @@
+target-versions:
+  k8s: v1.25.0
+deprecated-versions:
+  - version: core.k8sgpt.ai/v1alpha1
+    kind: K8sGPT
+    deprecated-in: v1.25.0
+    removed-in: v1.29.0
+    replacement-api: bla
+    component: k8s

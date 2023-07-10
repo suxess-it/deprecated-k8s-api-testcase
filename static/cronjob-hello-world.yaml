@@ -1,0 +1,20 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello-world
+spec:
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: Replace
+  successfulJobsHistoryLimit: 10
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: demo-cron-job
+            image: node:14-alpine
+            imagePullPolicy: Always
+            args:
+            - -e
+            - "console.log(new Date().toString());"
+          restartPolicy: OnFailure

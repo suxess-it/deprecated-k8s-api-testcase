@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "hello-world.fullname" . }}-cm
+data:
+  apiVersions.txt: |
+    {{ .Capabilities.APIVersions }}
+  kubeVersion.txt: |
+    {{ .Capabilities.KubeVersion }}

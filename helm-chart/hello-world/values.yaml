@@ -1,0 +1,12 @@
+helloWorld:
+  nginx:
+    image:
+      repository: nginx
+      tag: latest
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  replicas: 5
+  type: ClusterIP
+kubernetesClusterDomain: cluster.local

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "hello-world.fullname" . }}-hello-world
+  labels:
+    app: hello-world
+  {{- include "hello-world.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.helloWorld.replicas }}
+  selector:
+    matchLabels:
+      app: hello-world
+    {{- include "hello-world.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: hello-world
+      {{- include "hello-world.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.helloWorld.nginx.image.repository }}:{{ .Values.helloWorld.nginx.image.tag
+          | default .Chart.AppVersion }}
+        name: nginx
+        resources: {}

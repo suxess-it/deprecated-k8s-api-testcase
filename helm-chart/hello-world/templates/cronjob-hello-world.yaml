@@ -1,0 +1,22 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ include "hello-world.fullname" . }}-hello-world
+  labels:
+  {{- include "hello-world.labels" . | nindent 4 }}
+spec:
+  concurrencyPolicy: Replace
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - -e
+            - console.log(new Date().toString());
+            image: node:14-alpine
+            imagePullPolicy: Always
+            name: demo-cron-job
+          restartPolicy: OnFailure
+  schedule: '*/1 * * * *'
+  successfulJobsHistoryLimit: 10
